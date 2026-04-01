@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Montserrat&family=Roboto&family=Inter&family=Oswald&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1 >Cinerverse</h1>
+  <div >
+    <label for="search"></label>
+    <input  type="text" id="search" placeholder="Search movie..." />
+    <button onclick="handleSearchInput()">Search</button>
+  <div>
+    <label>Genre:</label>
+    <select id="genre" onchange="handlefilter()">
+      <option value="">Select Genre</option>
+      <option value="action">Action</option>
+      <option value="comedy">Comedy</option>
+      <option value="drama">Drama</option>
+      <option value="horror">Horror</option>
+      <option value="romance">Romance</option>
+      <option value="animation">animation</option>
+      <option value="sciencefiction">Sci-Fi</option>
+      <option value="thriller">thriller</option>
+      <option value="family">Kids & Family</option>
+    </select>
+
+  
+    <label>Language:</label>
+    <select id="lang" onchange="handlefilter()">
+      <option value="">All languages</option>
+      <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="mr">Marathi</option>
+    </select>
+  </div>
+
+  <br>
+
+  <div id="movies">
+
+  </div>
+
+  <div>
+  <button onclick="prevPage()">⬅ Prev</button>
+  <span id="pageNumber">Page 1</span>
+  <button onclick="nextPage()">Next ➡</button>
+</div>
+
+  <h2 id="watchlist-h1">My Watchlist</h2>
+  
+  <div id="watchlist">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
