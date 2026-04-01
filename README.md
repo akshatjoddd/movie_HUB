@@ -1,5 +1,6 @@
 # movie_HUB
-
+note - this wont work when cloned because , api key is hidden by config.js using .gitignore i will provide netlify link instead
+link - https://helpful-tulumba-c5ba69.netlify.app/
 
 ## 🎬 Movie Explorer (JavaScript Project)
 Name - CINEVERSE
