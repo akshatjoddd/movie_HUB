@@ -239,7 +239,7 @@ function addToWatchlist(movie,button) {
   button.classList.remove("add-btn");
   button.classList.add("added");
 
-  movie.btn = button; //store reference 
+  movie.btn = button; //storing reference
 
   let container = document.getElementById("watchlist");
 
