@@ -1,3 +1,5 @@
+const API_KEY = window.API_KEY;
+// console.log("API KEY:", API_KEY);
 const GENRES = {
   action: 28,
   adventure: 12,
@@ -71,8 +73,7 @@ async function getdata(lang, genre) {
   try {
     genre = genre?.toLowerCase();
 
-    let url = `https://api.themoviedb.org/3/discover/movie?api_key=6654a81f73458e9c15388a19a4456fa1&page=${currentPage}`;
-
+        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${currentPage}`;
     if (GENRES[genre]) {
       url +=`&with_genres=${GENRES[genre]}`;
     }
@@ -117,8 +118,7 @@ function handlefilter() {
 async function searchmovie(query, lang, genre) {
   try {
     let res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=6654a81f73458e9c15388a19a4456fa1&query=${encodeURIComponent(query)}&page=${currentPage}`
-    );
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${currentPage}`)
 
     let data = await res.json();
     let movies = data.results;
@@ -239,7 +239,7 @@ function addToWatchlist(movie,button) {
   button.classList.remove("add-btn");
   button.classList.add("added");
 
-  movie.btn = button; //storing reference
+  movie.btn = button; //store reference 
 
   let container = document.getElementById("watchlist");
 
