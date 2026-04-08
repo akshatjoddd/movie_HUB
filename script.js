@@ -1,5 +1,5 @@
-const API_KEY = window.API_KEY;
-// console.log("API KEY:", API_KEY);
+// const API_KEY = window.API_KEY;
+// // console.log("API KEY:", API_KEY);
 const GENRES = {
   action: 28,
   adventure: 12,
@@ -66,14 +66,15 @@ let Alt="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMIAAAEDCAMAAABQ/CumAAAAe
 // FILTER DATA
 
 var currentPage = 1;
-var lastlang=""
-
+var lastLang = "";
+var lastGenre = "";
+var lastQuery = "";
 
 async function getdata(lang, genre) {
   try {
     genre = genre?.toLowerCase();
 
-        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${currentPage}`;
+        let url = `https://api.themoviedb.org/3/discover/movie?api_key=9c7e5a72d0ceb43815eba298ce36273c&page=${currentPage}`;
     if (GENRES[genre]) {
       url +=`&with_genres=${GENRES[genre]}`;
     }
@@ -118,7 +119,7 @@ function handlefilter() {
 async function searchmovie(query, lang, genre) {
   try {
     let res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${currentPage}`)
+      `https://api.themoviedb.org/3/search/movie?api_key=9c7e5a72d0ceb43815eba298ce36273c&query=${encodeURIComponent(query)}&page=${currentPage}`)
 
     let data = await res.json();
     let movies = data.results;
@@ -144,7 +145,6 @@ async function searchmovie(query, lang, genre) {
 
 
 
-let lastQuery = "";
 function handleSearchInput() {
   let query = document.getElementById("search").value;
   let lang = document.getElementById("lang").value;
@@ -177,18 +177,18 @@ function rendermovies(movies) {
   movies.forEach(movie => {
    let div = document.createElement("div");
 div.className = "movie-card1";
-let imageSrc = "";
+let image_src = "";
 
 if (!movie.poster_path) {
-  imageSrc = "data:image/png;base64,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";
+  image_src = "data:image/png;base64,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";
 } else {
-  imageSrc = "https://image.tmdb.org/t/p/w200" + movie.poster_path;
+  image_src = "https://image.tmdb.org/t/p/w200" + movie.poster_path;
 }
 
 div.innerHTML = `
   <div  style="display: flex; flex-direction: column; align-items: center;">
     <h3 style="color:white">${movie.title}</h3>
-    <img src="${imageSrc}"  />
+    <img src="${image_src}"  />
     <p>🗓️ ${movie.release_date.slice(0,4)}</p>
     <p>🌐 ${ LANGUAGES[movie.original_language]}</p>
     <p>⭐ RATING(<span style="color:yellow">${movie.vote_average || "N/A"}</span>)</p>
@@ -245,13 +245,13 @@ function addToWatchlist(movie,button) {
 
   let div = document.createElement("div");
 
-  let imageSrc = movie.poster_path
+  let image_src = movie.poster_path
     ? "https://image.tmdb.org/t/p/w300" + movie.poster_path
     : Alt;
 
   div.innerHTML = `
     <div style="border:2px solid white; text-align:center ; padding:10px">
-      <img src="${imageSrc}" />
+      <img src="${image_src}" />
       <h3>${movie.title}</h3>
       <button class="remove">Remove</button>
     </div>
@@ -283,8 +283,11 @@ function remove(movie, div) {
 
 // ____________________________pagination
 
+
+
+
 function nextPage() {
-  currentPage++;
+  currentPage+=1;
   document.getElementById("pageNumber").innerText = `Page ${currentPage}`;
 
   if (lastQuery) {
@@ -296,7 +299,7 @@ function nextPage() {
 
 function prevPage() {
   if (currentPage > 1) {
-    currentPage--;
+    currentPage-=1;
     document.getElementById("pageNumber").innerText = `Page ${currentPage}`;
 
     if (lastQuery) {
@@ -307,8 +310,8 @@ function prevPage() {
   }
 }
 
+// first call
+lastLang = "";
+lastGenre = "";
+getdata(lastLang, lastGenre);
 
-
-// initial call
-
-getdata("", "");
